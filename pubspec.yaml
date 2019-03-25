@@ -1,0 +1,110 @@
+name: flutter_showcase_app
+description: A new Flutter application.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the Cupertino Icons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+
+  # HTTP Client
+  http: ^0.12.0+1
+
+  # Path Provider
+  path_provider: ^0.5.0+1
+
+  # Video Player
+  chewie: ^0.9.5
+
+  # Downloader
+  flutter_downloader: ^1.1.6
+
+  # Permissions:
+  permission_handler: ^3.0.0
+
+  # For Json Serialization (Check out: https://flutter.dev/docs/development/data-and-backend/json)
+  json_annotation: ^2.0.0
+
+  # Redux Contains Middleware
+  redux: ^3.0.0
+
+  # Redux Additional Components
+  flutter_redux: ^0.5.3
+
+  #Database
+  sqflite: ^1.0.0
+
+  # Cached Network Image
+  cached_network_image: ^0.7.0
+
+  # App Review
+  launch_review: ^2.0.0
+
+  # Bottom Navigation
+  bmnav: ^0.3.4
+
+  # URL Launcher
+  url_launcher: ^5.0.2
+
+  # English words
+  english_words: ^3.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Your other dev_dependencies here
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
+
+  # Flutter Launcher Icons:
+  flutter_launcher_icons: ^0.7.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+   - assets/images/
+   - assets/icon/icon.png
+
+  fonts:
+  - family: Raleway
+    fonts:
+     - asset: fonts/Raleway-Regular.ttf
+     - asset: fonts/Raleway-Italic.ttf
+       style: italic
+     - asset: fonts/Raleway-Bold.ttf
+     - asset: fonts/Raleway-Light.ttf
+     - asset: fonts/Raleway-Medium.ttf
+     - asset: fonts/Raleway-Thin.ttf
+# flutter packages pub run flutter_launcher_icons:main
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"

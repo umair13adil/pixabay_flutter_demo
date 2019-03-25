@@ -1,0 +1,121 @@
+PODS:
+  - Firebase/AdMob (5.2.0):
+    - Firebase/Core
+    - Google-Mobile-Ads-SDK (= 7.31.0)
+  - Firebase/Core (5.2.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.1)
+  - Firebase/CoreOnly (5.2.0):
+    - FirebaseCore (= 5.0.3)
+  - firebase_admob (0.0.1):
+    - Firebase/AdMob
+    - Firebase/Core
+    - Flutter
+  - FirebaseAnalytics (5.0.1):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.0.3):
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+  - FirebaseInstanceID (3.1.0):
+    - FirebaseCore (~> 5.0)
+  - Flutter (1.0.0)
+  - flutter_downloader (0.0.1):
+    - Flutter
+  - FMDB (2.7.2):
+    - FMDB/standard (= 2.7.2)
+  - FMDB/standard (2.7.2)
+  - Google-Mobile-Ads-SDK (7.31.0)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - launch_review (0.0.1):
+    - Flutter
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
+  - path_provider (0.0.1):
+    - Flutter
+  - permission_handler (3.0.0):
+    - Flutter
+  - screen (0.0.1):
+    - Flutter
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
+  - url_launcher (0.0.1):
+    - Flutter
+  - video_player (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - firebase_admob (from `.symlinks/plugins/firebase_admob/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_downloader (from `.symlinks/plugins/flutter_downloader/ios`)
+  - launch_review (from `.symlinks/plugins/launch_review/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - screen (from `.symlinks/plugins/screen/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FMDB
+    - Google-Mobile-Ads-SDK
+    - GoogleToolboxForMac
+    - nanopb
+
+EXTERNAL SOURCES:
+  firebase_admob:
+    :path: ".symlinks/plugins/firebase_admob/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_downloader:
+    :path: ".symlinks/plugins/flutter_downloader/ios"
+  launch_review:
+    :path: ".symlinks/plugins/launch_review/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+  screen:
+    :path: ".symlinks/plugins/screen/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
+
+SPEC CHECKSUMS:
+  Firebase: aa382c246b7bf268d84194bab0c2f6ab5b4bd0e2
+  firebase_admob: b8cc46113ddf88a62fec340e9446607a5061a872
+  FirebaseAnalytics: b8bce8d5c40173328b8a4300da18c5c7e0a1908d
+  FirebaseCore: 8b66f9d76f929678be3f77e6415c02cd58653c17
+  FirebaseInstanceID: 0f6e70e67eb6166079fba1bbf383b46da505351e
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_downloader: ff8f392c1b9d2a35f7c7578508e64504335fdab0
+  FMDB: 05858873460cee7a6f976ed5881faa7e86de505c
+  Google-Mobile-Ads-SDK: e5d898539354e628d248b4f6bb266a27512bce87
+  GoogleToolboxForMac: 0417945efb82412f3396303ee85d8b6ae9d7c167
+  launch_review: 98c85a4cb86d1376b14958ebe69ddbcc753ff192
+  nanopb: 7ff14b1dce580107a15de90796e901596d5529bd
+  path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
+  permission_handler: 03dcf3ade9d5f398b8854b366cb9de718d3daa76
+  screen: 22ab9c4a784112d4b21ad7d80e81729e0afdaa65
+  sqflite: d1612813fa7db7c667bed9f1d1b508deffc56999
+  url_launcher: 92b89c1029a0373879933c21642958c874539095
+  video_player: 906796a841943c8d370ac7c13b18039aa9b56498
+
+PODFILE CHECKSUM: 9bad6d537295f54bf4e08e2c2cc0bdab14250205
+
+COCOAPODS: 1.5.3

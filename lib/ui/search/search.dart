@@ -8,18 +8,23 @@ import 'package:flutter_showcase_app/models/search/Hit.dart';
 import 'package:flutter_showcase_app/ui/detail/detail_page.dart';
 import 'package:flutter_showcase_app/ui/home/app_bar.dart';
 import 'package:flutter_showcase_app/ui/search/list/search_list_item_grid.dart';
+import 'package:flutter_showcase_app/ui/search/search2.dart';
 import 'package:flutter_showcase_app/ui/search/search_bloc.dart';
-import 'package:flutter_showcase_app/utils/utils.dart';
 
 class SearchScreen extends StatefulWidget {
+  String searchQuery;
+
+  SearchScreen(this.searchQuery);
+
   @override
-  State<StatefulWidget> createState() => SearchScreenPageState();
+  State<StatefulWidget> createState() => SearchScreenPageState(searchQuery);
 }
 
 class SearchScreenPageState extends State<SearchScreen> {
-
-  String searchQuery = Utils.getRandomSearch();
+  String searchQuery;
   SearchBloc searchBloc;
+
+  SearchScreenPageState(this.searchQuery);
 
   @override
   Widget build(BuildContext context) {
@@ -27,41 +32,50 @@ class SearchScreenPageState extends State<SearchScreen> {
         appBar: AppBarWidget(),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-            child: Center(
-          child: Padding(
-              padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 10.0),
-              child: Column(
-                children: <Widget>[
-                  StreamBuilder<List<Hit>>(
-                    stream: searchBloc.searchResults,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData && snapshot.data.isNotEmpty) {
-                        searchQuery = ""; //Clear search query on result
-                        return _buildSearchResultWidget(snapshot.data);
-                      } else if (snapshot.hasError) {
-                        print(snapshot.error);
-                        return Text("${snapshot.error}");
-                      } else if (snapshot.hasData && snapshot.data.isEmpty) {
-                        return Column(
-                          children: <Widget>[
-                            _buildSearchWidget(),
-                            CircularProgressIndicator()
-                          ],
-                        );
-                      } else {
-                        return Column(
-                          children: <Widget>[
-                            _buildSearchWidget(),
-                            CircularProgressIndicator()
-                          ],
-                        );
-                      }
-                    },
-                  ),
-                  BlocProvider<SearchBloc>(bloc: searchBloc, child: Container())
-                ],
-              )),
-        )));
+          child: Center(
+            child: Padding(
+                padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
+                child: Column(
+                  children: <Widget>[
+                    StreamBuilder<List<Hit>>(
+                      stream: searchBloc.searchResults,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData && snapshot.data.isNotEmpty) {
+                          searchQuery = ""; //Clear search query on result
+                          return _buildSearchResultWidget(snapshot.data);
+                        } else if (snapshot.hasError) {
+                          print(snapshot.error);
+                          return Text("${snapshot.error}");
+                        } else if (snapshot.hasData && snapshot.data.isEmpty) {
+                          return Column(
+                            children: <Widget>[
+                              _buildSearchWidget(),
+                              Text(
+                                Strings.noResults,
+                                style: TextStyle(
+                                    color: AppColors.colorPrimary,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                                softWrap: true,
+                              )
+                            ],
+                          );
+                        } else {
+                          return Column(
+                            children: <Widget>[
+                              _buildSearchWidget(),
+                              CircularProgressIndicator()
+                            ],
+                          );
+                        }
+                      },
+                    ),
+                    BlocProvider<SearchBloc>(bloc: searchBloc, child: Container())
+                  ],
+                )),
+          ),
+        ));
   }
 
   _buildSearchResultWidget(List<Hit> data) {
@@ -74,7 +88,7 @@ class SearchScreenPageState extends State<SearchScreen> {
         Future.delayed(const Duration(milliseconds: 500), () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => DetailScreen(
-                  //username: data.first.user,
+                //username: data.first.user,
                 ),
           ));
         });
@@ -86,8 +100,9 @@ class SearchScreenPageState extends State<SearchScreen> {
   _buildSearchWidget() {
     return Column(
       children: <Widget>[
-        _buildSearchField(),
-        _buildSearchButton(),
+        //_buildSearchField(),
+        //_buildSearchButton(),
+        SearchWidget(),
         _buildDivider(),
       ],
     );
@@ -176,6 +191,10 @@ class BuildListViewState extends State<BuildListView> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+        primary: false,
+        padding: EdgeInsets.all(0.0),
+        crossAxisSpacing: 0.0,
+        mainAxisSpacing: 0.0,
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         shrinkWrap: true,
@@ -185,7 +204,7 @@ class BuildListViewState extends State<BuildListView> {
         }));
   }
 
-  /*@override
+/*@override
   Widget build(BuildContext context) {
     return ListView(
         physics: NeverScrollableScrollPhysics(),

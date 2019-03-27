@@ -9,6 +9,7 @@ import 'package:flutter_showcase_app/constants/strings_const.dart';
 import 'package:flutter_showcase_app/models/search/Hit.dart';
 import 'package:flutter_showcase_app/ui/downloads/download_bloc.dart';
 import 'package:flutter_showcase_app/ui/home/app_bar.dart';
+import 'package:flutter_showcase_app/ui/home/app_bar_2.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -26,6 +27,7 @@ class DownloadProgressScreenPageState extends State<DownloadProgressScreen> {
   final Hit candidate;
   TargetPlatform platform;
   DownloadBloc downloadBloc;
+
   DownloadProgressScreenPageState(this.candidate);
 
   Future<bool> _onBackPressed(BuildContext context) {
@@ -40,7 +42,7 @@ class DownloadProgressScreenPageState extends State<DownloadProgressScreen> {
         _onBackPressed(context);
       },
       child: Scaffold(
-          appBar: AppBarWidget(),
+          appBar: AppBarBackWidget("1"),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
               child: Center(
@@ -72,7 +74,7 @@ class DownloadProgressScreenPageState extends State<DownloadProgressScreen> {
     downloadStory(candidate, context);
   }
 
-  void downloadStory(Hit storyItem, BuildContext context) async {
+  void downloadStory(Hit item, BuildContext context) async {
     _prepare().then((downloadPath) {
       print("Download Path: $downloadPath");
 
@@ -84,8 +86,8 @@ class DownloadProgressScreenPageState extends State<DownloadProgressScreen> {
 
       _checkPermission().then((hasGranted) {
         if (hasGranted) {
-         /* downloadBloc.downloadMedia(storyItem.user_name, storyItem.url,
-              storyItem.media_type, downloadPath, context);*/
+          downloadBloc.downloadMedia(
+              item.user, item.largeImageUrl, 1, downloadPath, context);
         } else {
           _checkPermission();
         }

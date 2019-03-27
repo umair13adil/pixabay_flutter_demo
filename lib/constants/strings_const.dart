@@ -16,6 +16,10 @@ class Strings {
   //How To Use
   static const String goBackText = "Go back";
 
+  //Search
+  static const String noResults = "Your search returned no results.";
+  static const String searchHint = "Enter search query here.";
+
   //Detail Page
   static const String commentsText = "Comments";
   static const String downloadsText = "Downloads";

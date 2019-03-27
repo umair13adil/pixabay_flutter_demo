@@ -101,16 +101,18 @@ class FavouritesListItem extends StatelessWidget {
   }
 
   _buildFollowers() {
-    return Text(
-      fav?.description,
-      softWrap: true,
-      maxLines: 1,
-      overflow: TextOverflow.fade,
-      style: TextStyle(
-          color: AppColors.colorTextDark,
-          fontWeight: FontWeight.normal,
-          fontSize: 12),
-    );
+    return ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 100.0),
+        child: Text(
+          fav?.description,
+          softWrap: true,
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          style: TextStyle(
+              color: AppColors.colorTextDark,
+              fontWeight: FontWeight.normal,
+              fontSize: 12),
+        ));
   }
 
   _buildRemoveFromFavouritesButton() {

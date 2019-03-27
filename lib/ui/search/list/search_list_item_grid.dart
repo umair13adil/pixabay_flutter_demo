@@ -22,12 +22,14 @@ class SearchListItemGrid extends StatelessWidget {
     final makeListTile = GridTile(
         child: InkResponse(
             onTap: () => _onTileClicked(context, item),
-            child: ListTile(
-                subtitle: Image(
-                    height: 150,
-                    width: 180,
-                    fit: BoxFit.fill,
-                    image: CachedNetworkImageProvider(item.previewUrl)))));
+            child: Container(
+                margin: const EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                    color: Colors.black54,
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(item.previewUrl),
+                      fit: BoxFit.cover,
+                    )))));
 
     return makeListTile;
   }

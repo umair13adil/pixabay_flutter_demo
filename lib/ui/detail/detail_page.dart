@@ -5,7 +5,6 @@ import 'package:flutter_showcase_app/models/search/Hit.dart';
 import 'package:flutter_showcase_app/ui/detail/detail_bloc.dart';
 import 'package:flutter_showcase_app/ui/detail/detail_page_body.dart';
 import 'package:flutter_showcase_app/ui/detail/detail_page_header.dart';
-import 'package:flutter_showcase_app/ui/home/app_bar.dart';
 import 'package:flutter_showcase_app/ui/home/app_bar_2.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -27,11 +26,11 @@ class DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarBackWidget("1"),
+        appBar: AppBarBackWidget(),
         backgroundColor: Colors.white,
         body: CustomScrollView(slivers: <Widget>[
           _buildUserDetails(),
-          _buildUserStories(),
+          _buildContent(),
           _userAddedToFavListener(),
           SliverList(
               delegate: SliverChildListDelegate([
@@ -54,10 +53,10 @@ class DetailScreenState extends State<DetailScreen> {
     }
   }
 
-  _buildUserStories() {
+  _buildContent() {
     try {
       return SliverList(
-          delegate: SliverChildListDelegate([UserStoryWidget(item: item)]));
+          delegate: SliverChildListDelegate([DetailContentWidget(item: item)]));
     } catch (e) {
       return Container();
     }
@@ -76,8 +75,6 @@ class DetailScreenState extends State<DetailScreen> {
                       SnackBar(content: Text('Added to favourite!')));
                 } catch (e) {}
                 return Container();
-              } else {
-                return Text("No Stories!");
               }
             } else if (snapshot.hasError) {
               print(snapshot.error);
@@ -93,7 +90,6 @@ class DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     detailBloc = DetailBloc();
-    //detailBloc.getUserDetails(username);
   }
 
   @override

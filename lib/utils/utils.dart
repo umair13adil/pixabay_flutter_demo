@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'dart:math';
 
 import 'package:english_words/english_words.dart';
@@ -52,12 +53,12 @@ class Utils {
 
   static int getRandomNumber() {
     Random rnd = Random();
-    int min = 5;
-    int max = 10;
+    int min = 7;
+    int max = 100;
     return min + rnd.nextInt(max - min);
   }
 
   static String getRandomSearch() {
-    return nouns.take(50).elementAt(Utils.getRandomNumber()).toLowerCase();
+    return nouns.take(250).elementAt(Utils.getRandomNumber()).toLowerCase();
   }
 }

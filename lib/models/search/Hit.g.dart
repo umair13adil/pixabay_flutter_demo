@@ -30,7 +30,7 @@ Hit _$HitFromJson(Map<String, dynamic> json) {
       previewWidth: json['previewWidth'] as int,
       userImageUrl: json['userImageURL'] as String,
       previewUrl: json['previewURL'] as String,
-      pictureId: json['pictureId'] as String,
+      pictureId: json['picture_id'] as String,
       videos: json['videos'] == null
           ? null
           : Videos.fromJson(json['videos'] as Map<String, dynamic>),
@@ -60,7 +60,7 @@ Map<String, dynamic> _$HitToJson(Hit instance) => <String, dynamic>{
       'previewWidth': instance.previewWidth,
       'userImageURL': instance.userImageUrl,
       'previewURL': instance.previewUrl,
-      'pictureId': instance.pictureId,
+      'picture_id': instance.pictureId,
       'videos': instance.videos,
       'duration': instance.duration
     };
@@ -85,4 +85,10 @@ T _$enumDecodeNullable<T>(Map<T, dynamic> enumValues, dynamic source) {
   return _$enumDecode<T>(enumValues, source);
 }
 
-const _$TypeEnumMap = <Type, dynamic>{Type.photo: 'photo', Type.film: 'film'};
+const _$TypeEnumMap = <Type, dynamic>{
+  Type.photo: 'photo',
+  Type.film: 'film',
+  Type.animation: 'animation',
+  Type.illustration: 'illustration',
+  Type.vector: 'vector',
+};

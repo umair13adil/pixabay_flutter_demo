@@ -15,4 +15,5 @@ class AppColors{
 
   static Color colorTextDark = HexColor("625E5F");
   static Color colorTextDark2 = HexColor("626160");
+  static Color tabIndicatorColor = HexColor("FFFFFF");
 }

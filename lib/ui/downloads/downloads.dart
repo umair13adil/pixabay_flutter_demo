@@ -6,6 +6,7 @@ import 'package:flutter_showcase_app/models/downloads/Downloaded.dart';
 import 'package:flutter_showcase_app/ui/downloads/download_bloc.dart';
 import 'package:flutter_showcase_app/ui/favourites/fav_bloc.dart';
 import 'package:flutter_showcase_app/ui/home/app_bar.dart';
+import 'package:flutter_showcase_app/ui/home/app_bar_2.dart';
 
 class DownloadsScreen extends StatefulWidget {
 
@@ -20,7 +21,7 @@ class DownloadsScreenPageState extends State<DownloadsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarWidget(),
+        appBar: AppBarBackWidget(),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
             child: Center(

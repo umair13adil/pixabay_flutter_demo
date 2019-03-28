@@ -1,23 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_app/constants/colors_const.dart';
-import 'package:flutter_showcase_app/constants/strings_const.dart';
 import 'package:flutter_showcase_app/models/search/Hit.dart';
-import 'package:flutter_showcase_app/ui/detail/story_list_item.dart';
+import 'package:flutter_showcase_app/ui/detail/list_item.dart';
 
-class UserStoryWidget extends StatefulWidget {
+class DetailContentWidget extends StatefulWidget {
   Hit item;
 
-  UserStoryWidget({Key key, @required this.item}) : super(key: key);
+  DetailContentWidget({Key key, @required this.item}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => UserStoryWidgetPageState(item: item);
+  State<StatefulWidget> createState() => DetailContentWidgetPageState(item: item);
 }
 
-class UserStoryWidgetPageState extends State<UserStoryWidget> {
+class DetailContentWidgetPageState extends State<DetailContentWidget> {
   Hit item;
 
-  UserStoryWidgetPageState({Key key, @required this.item});
+  DetailContentWidgetPageState({Key key, @required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +27,11 @@ class UserStoryWidgetPageState extends State<UserStoryWidget> {
           item.tags,
           style: TextStyle(
               color: AppColors.colorPrimary,
-              fontSize: 30,
-              fontWeight: FontWeight.bold),
+              fontSize: 20,
+              fontWeight: FontWeight.normal),
           textAlign: TextAlign.center,
         ),
-        StoryListItem(item)
+        DetailListItem(item)
       ],
     );
   }

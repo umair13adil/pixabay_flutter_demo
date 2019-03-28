@@ -34,15 +34,15 @@ class _VideoAppState extends State<VideoApp> {
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
       aspectRatio: deviceRatio,
-      autoPlay: true,
+      autoPlay: false,
       looping: true,
       allowFullScreen: true,
       allowMuting: true,
-      showControls: true,
+      showControls: false,
     );
 
     return Scaffold(
-        appBar: AppBarBackWidget("2"),
+        appBar: AppBarBackWidget(),
         backgroundColor: Colors.white,
         body: CustomScrollView(slivers: <Widget>[
           SliverList(

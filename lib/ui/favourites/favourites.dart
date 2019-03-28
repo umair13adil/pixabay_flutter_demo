@@ -19,7 +19,7 @@ class FavouritesScreenPageState extends State<FavouritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarBackWidget("1"),
+        appBar: AppBarBackWidget(),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
             child: Center(

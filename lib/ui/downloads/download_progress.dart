@@ -42,7 +42,7 @@ class DownloadProgressScreenPageState extends State<DownloadProgressScreen> {
         _onBackPressed(context);
       },
       child: Scaffold(
-          appBar: AppBarBackWidget("1"),
+          appBar: AppBarBackWidget(),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
               child: Center(

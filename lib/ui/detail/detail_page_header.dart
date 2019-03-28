@@ -6,7 +6,6 @@ import 'package:flutter_showcase_app/constants/colors_const.dart';
 import 'package:flutter_showcase_app/constants/strings_const.dart';
 import 'package:flutter_showcase_app/models/search/Hit.dart';
 import 'package:flutter_showcase_app/ui/detail/detail_bloc.dart';
-import 'package:flutter_showcase_app/ui/downloads/download_progress.dart';
 import 'package:flutter_showcase_app/utils/utils.dart';
 
 class DetailPageHeaderWidget extends StatefulWidget {
@@ -116,7 +115,7 @@ class DetailPageHeaderPageState extends State<DetailPageHeaderWidget> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: CachedNetworkImageProvider(item.largeImageUrl)))));
+                    image: CachedNetworkImageProvider(item.userImageUrl)))));
   }
 
   _buildUserName(double width_70) {
@@ -204,34 +203,12 @@ class DetailPageHeaderPageState extends State<DetailPageHeaderWidget> {
   }
 
   _buildActionButtons() {
-    return Row(
-      children: <Widget>[
-        _buildHDPictureDownloadWidget(),
-        StreamBuilder<bool>(
-            initialData: false,
-            stream: detailBloc.userAddedToFavourite,
-            builder: (context, snapshot) {
-              return _buildAddToFavouritesButton(snapshot.data);
-            }),
-      ],
-    );
-  }
-
-  _buildHDPictureDownloadWidget() {
-    return Padding(
-        padding: const EdgeInsets.only(
-            top: 5.0, bottom: 5.0, left: 20.0, right: 5.0),
-        child: RaisedButton(
-            child: Text(Strings.downloadProfilePictureText,
-                style: TextStyle(color: AppColors.colorWhite, fontSize: 10)),
-            color: AppColors.colorPrimary,
-            padding: const EdgeInsets.only(
-                top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
-            onPressed: () {
-              _downloadHDProfilePicture();
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0))));
+    return StreamBuilder<bool>(
+        initialData: false,
+        stream: detailBloc.userAddedToFavourite,
+        builder: (context, snapshot) {
+          return _buildAddToFavouritesButton(snapshot.data);
+        });
   }
 
   _buildAddToFavouritesButton(bool isAdded) {

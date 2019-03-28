@@ -33,9 +33,16 @@ class Repository {
 
   // Search: -------------------------------------------------------------------
 
-  Future<List<Hit>> getSearchResults(String keyword) async {
+  Future<List<Hit>> getSearchResultsForImages(String keyword) async {
     return _api
-        .search(keyword)
+        .searchImages(keyword)
+        .then((response) => response)
+        .catchError((error) => throw error);
+  }
+  
+  Future<List<Hit>> getSearchResultsForVideos(String keyword) async {
+    return _api
+        .searchVideos(keyword)
         .then((response) => response)
         .catchError((error) => throw error);
   }

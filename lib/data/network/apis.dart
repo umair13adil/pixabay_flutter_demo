@@ -16,8 +16,19 @@ class Apis {
   // rest client
   final _restClient = RestClient();
 
-  Future<List<Hit>> search(String keyword) async {
+  Future<List<Hit>> searchImages(String keyword) async {
     String url = Strings.SEARCH_URL + keyword;
+
+    var results = await _restClient
+        .getHttps(url)
+        .then((res) => SearchResults.fromJson(res).hits.toList())
+        .catchError((error) => throw error);
+
+    return results;
+  }
+
+  Future<List<Hit>> searchVideos(String keyword) async {
+    String url = Strings.SEARCH_VIDEOS_URL + keyword;
 
     var results = await _restClient
         .getHttps(url)

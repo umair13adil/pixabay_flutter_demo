@@ -23,38 +23,6 @@ class DetailPageHeaderPageState extends State<DetailPageHeaderWidget> {
 
   DetailPageHeaderPageState({Key key, @required this.item});
 
-  void _downloadHDProfilePicture() {
-    _showDialog();
-  }
-
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          content: Text(Strings.viewAdText),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            FlatButton(
-              child: Text(Strings.okText),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text(Strings.cancelText),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -135,7 +103,7 @@ class DetailPageHeaderPageState extends State<DetailPageHeaderWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Text(
-          Utils.formatFollowersText(item.comments),
+          Utils.formatCountText(item.comments),
           style: TextStyle(
               color: AppColors.colorTextDark2,
               fontSize: 16,
@@ -159,7 +127,7 @@ class DetailPageHeaderPageState extends State<DetailPageHeaderWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Text(
-          Utils.formatFollowersText(item.downloads),
+          Utils.formatCountText(item.downloads),
           style: TextStyle(
               color: AppColors.colorTextDark2,
               fontSize: 16,
@@ -183,7 +151,7 @@ class DetailPageHeaderPageState extends State<DetailPageHeaderWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Text(
-          Utils.formatFollowersText(item.likes),
+          Utils.formatCountText(item.likes),
           style: TextStyle(
               color: AppColors.colorTextDark2,
               fontSize: 16,

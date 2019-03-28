@@ -39,10 +39,6 @@ class DetailScreenState extends State<DetailScreen> {
         ]));
   }
 
-  _buildProgressBar() {
-    return Center(child: CircularProgressIndicator());
-  }
-
   _buildUserDetails() {
     try {
       return SliverList(

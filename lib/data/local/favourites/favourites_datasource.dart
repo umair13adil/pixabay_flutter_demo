@@ -36,11 +36,11 @@ class FavouritesDatasource {
     return list;
   }
 
-  Future removeFromFavourite(Favourites user) async {
+  Future removeFromFavourite(Favourites fav) async {
     // Assuming that the number of rows is the id for the last row.
     final rowsDeleted =
-        await dbHelper.delete(user.pk, dbHelper.table_favourites);
-    print('Removed $rowsDeleted row(s): row $user.pk');
+        await dbHelper.delete(fav.id, dbHelper.table_favourites);
+    print('Removed $rowsDeleted row(s): row $fav.pk');
   }
 
   Future<bool> isAddedToFavourites(Hit user) async {

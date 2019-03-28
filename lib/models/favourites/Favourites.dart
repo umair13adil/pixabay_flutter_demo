@@ -1,9 +1,14 @@
 class Favourites {
-  int pk;
+  int id;
   String username;
-  String full_name;
-  String image_url;
-  String description;
+  String comments;
+  String downloads;
+  String likes;
+  String userImage;
+  String contentUrl;
+  String isVideo;
+  String tags;
 
-  Favourites(this.pk, this.username, this.full_name, this.image_url, this.description);
+  Favourites(this.id, this.username, this.comments, this.downloads,
+      this.likes, this.userImage, this.contentUrl, this.isVideo, this.tags);
 }

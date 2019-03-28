@@ -3,32 +3,56 @@ import 'package:flutter_showcase_app/models/favourites/Favourites.dart';
 class FavouritesDAO {
   int id;
   String username;
-  String fullName;
-  String imageURL;
-  String description;
+  String comments;
+  String downloads;
+  String likes;
+  String userImage;
+  String contentUrl;
+  String isVideo;
+  String tags;
 
-  FavouritesDAO(
-      this.id, this.username, this.fullName, this.imageURL, this.description);
+  FavouritesDAO(this.id, this.username, this.comments, this.downloads,
+      this.likes, this.userImage, this.contentUrl, this.isVideo, this.tags);
 
   FavouritesDAO.fromObject(Favourites favourites)
-      : this(favourites.pk, favourites.username, favourites.full_name,
-            favourites.image_url, favourites.description);
+      : this(favourites.id,
+            favourites.username,
+            favourites.comments,
+            favourites.downloads,
+            favourites.likes,
+            favourites.userImage,
+            favourites.contentUrl,
+            favourites.isVideo,
+            favourites.tags);
 
   FavouritesDAO.fromMap(Map<String, dynamic> map)
-      : this(map['id'], map['username'], map['fullName'], map['imageURL'],
-            map['description']);
+      : this(
+          map['id'],
+          map['username'],
+          map['comments'],
+          map['downloads'],
+          map['likes'],
+          map['userImage'],
+          map['contentUrl'],
+          map['isVideo'],
+          map['tags'],
+        );
 
   toObject() {
-    return Favourites(id, username, fullName, imageURL, description);
+    return Favourites(id, username, comments, downloads, likes, userImage, contentUrl, isVideo, tags);
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'username': username,
-      'fullName': fullName,
-      'imageURL': imageURL,
-      'description': description,
+      'comments': comments,
+      'downloads': downloads,
+      'likes': likes,
+      'userImage': userImage,
+      'contentUrl': contentUrl,
+      'isVideo': isVideo,
+      'tags': tags,
     };
   }
 }

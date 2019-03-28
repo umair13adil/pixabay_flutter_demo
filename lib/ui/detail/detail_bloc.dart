@@ -29,23 +29,10 @@ class DetailBloc extends BlocBase {
 
   get userAddedToFavourite => _userAddedToFavController.stream;
 
-  getUserDetails(String username) async {
-    /*try {
-      _repo.getUserDetails(username).then((result) {
-        _userDetailsController.sink.add(result);
-      }).catchError((error) {
-        _userDetailsController.sink.addError(error);
-      });
-    } catch (e) {
-      print("Error: " + e.toString());
-    }*/
-  }
-
-  addToFavourite(Hit user) async {
+  addToFavourite(Hit item) async {
     try {
       _repo.favDatasource
-          .addToFavourite(Favourites(user.id, user.user, user.userImageUrl,
-              user.largeImageUrl, user.tags.toString()))
+          .addToFavourite(_getFavouriteObject(item))
           .then((result) {
         _userFavController.sink.add(result);
         _userAddedToFavController.sink.add(true);
@@ -57,11 +44,10 @@ class DetailBloc extends BlocBase {
     }
   }
 
-  removeFromFavourite(Hit user) async {
+  removeFromFavourite(Hit item) async {
     try {
       _repo.favDatasource
-          .removeFromFavourite(Favourites(user.id, user.user, user.userImageUrl,
-          user.largeImageUrl, user.tags.toString()))
+          .removeFromFavourite(_getFavouriteObject(item))
           .then((result) {
         _userAddedToFavController.sink.add(false);
       }).catchError((error) {
@@ -72,12 +58,37 @@ class DetailBloc extends BlocBase {
     }
   }
 
-  isAddedToFavourites(Hit user) async {
-    _repo.favDatasource.isAddedToFavourites(user).then((result) {
+  isAddedToFavourites(Hit item) async {
+    _repo.favDatasource.isAddedToFavourites(item).then((result) {
       _userAddedToFavController.sink.add(result);
     }).catchError((error) {
       _userAddedToFavController.sink.addError(error);
     });
+  }
+
+  Favourites _getFavouriteObject(Hit item) {
+    if (item.type == Type.photo) {
+      return Favourites(
+          item.id,
+          item.user,
+          item.comments.toString(),
+          item.downloads.toString(),
+          item.likes.toString(),
+          item.userImageUrl,
+          item.largeImageUrl,
+          "false",
+          item.tags.toString());
+    } else
+      return Favourites(
+          item.id,
+          item.user,
+          item.comments.toString(),
+          item.downloads.toString(),
+          item.likes.toString(),
+          item.userImageUrl,
+          item.videos.medium.url,
+          "true",
+          item.tags.toString());
   }
 
   @override

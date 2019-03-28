@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_showcase_app/bloc/bloc_provider.dart';
 import 'package:flutter_showcase_app/constants/colors_const.dart';
-import 'package:flutter_showcase_app/constants/strings_const.dart';
 import 'package:flutter_showcase_app/models/search/Hit.dart';
 import 'package:flutter_showcase_app/ui/search/list/search_list_item_grid.dart';
 import 'package:flutter_showcase_app/ui/search/search.dart';
@@ -17,15 +17,20 @@ class ImagesScreen extends StatefulWidget {
   State<StatefulWidget> createState() => ImagesScreenPageState(searchQuery);
 }
 
-class ImagesScreenPageState extends State<ImagesScreen> {
+class ImagesScreenPageState extends State<ImagesScreen>
+    with AutomaticKeepAliveClientMixin<ImagesScreen> {
   String searchQuery;
   SearchBloc searchBloc;
 
   ImagesScreenPageState(this.searchQuery);
 
   ValueChanged<String> querySubmitted(String q) {
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
     searchBloc.searchImages(q);
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +52,13 @@ class ImagesScreenPageState extends State<ImagesScreen> {
                         return Column(
                           children: <Widget>[
                             _buildSearchWidget(),
-                            Text(
-                              Strings.noResults,
-                              style: TextStyle(
-                                  color: AppColors.colorPrimary,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                              softWrap: true,
-                            )
+                            CircularProgressIndicator()
                           ],
                         );
                       } else {
-                        return Column(
-                          children: <Widget>[
-                            _buildSearchWidget(),
-                            CircularProgressIndicator()
-                          ],
+                        return Padding(
+                          padding: const EdgeInsets.all(28.0),
+                          child: CircularProgressIndicator(),
                         );
                       }
                     },
@@ -101,9 +96,9 @@ class ImagesScreenPageState extends State<ImagesScreen> {
 
   @override
   void initState() {
-    super.initState();
     searchBloc = SearchBloc();
     _searchForImages(context);
+    super.initState();
   }
 
   @override

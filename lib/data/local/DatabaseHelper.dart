@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "SaveStorie.db";
+  static final _databaseName = "PixaBayFlutter.db";
   static final _databaseVersion = 1;
 
   //Tables
@@ -17,9 +17,13 @@ class DatabaseHelper {
 
   //Fields Favourites
   static final fav_columnUserName = 'username';
-  static final fav_columnFullName = 'fullName';
-  static final fav_columnImageURL = 'imageURL';
-  static final fav_columnDescription = 'description';
+  static final fav_columnComments = 'comments';
+  static final fav_columnDownloads = 'downloads';
+  static final fav_columnLikes = 'likes';
+  static final fav_columnUserImage = 'userImage';
+  static final fav_columnContentUrl = 'contentUrl';
+  static final fav_columnIsVideo = 'isVideo';
+  static final fav_columnTags = 'tags';
 
   //Fields Downloads
   static final downloads_columnCaption = 'caption';
@@ -55,9 +59,13 @@ class DatabaseHelper {
           CREATE TABLE $table_favourites (
             $columnId INTEGER PRIMARY KEY,
             $fav_columnUserName TEXT NOT NULL,
-            $fav_columnFullName TEXT NOT NULL,
-            $fav_columnImageURL TEXT NOT NULL,
-            $fav_columnDescription TEXT NOT NULL
+            $fav_columnComments TEXT NOT NULL,
+            $fav_columnDownloads TEXT NOT NULL,
+            $fav_columnLikes TEXT NOT NULL,
+            $fav_columnUserImage TEXT NOT NULL,
+            $fav_columnContentUrl TEXT NOT NULL,
+            $fav_columnIsVideo TEXT NOT NULL,
+            $fav_columnTags TEXT NOT NULL
           )
           ''');
 

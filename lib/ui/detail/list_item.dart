@@ -3,10 +3,8 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_app/constants/colors_const.dart';
-import 'package:flutter_showcase_app/constants/images_const.dart';
 import 'package:flutter_showcase_app/constants/strings_const.dart';
 import 'package:flutter_showcase_app/models/search/Hit.dart';
-import 'package:flutter_showcase_app/ui/detail/video_player.dart';
 import 'package:flutter_showcase_app/ui/downloads/download_progress.dart';
 import 'package:video_player/video_player.dart';
 
@@ -24,12 +22,6 @@ class DetailListItemState extends State<DetailListItem> {
   ChewieController chewieController;
 
   DetailListItemState(this.item);
-
-  void _playVideo(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => VideoApp(item.videos.large.url),
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +57,15 @@ class DetailListItemState extends State<DetailListItem> {
   }
 
   _buildImage() {
-    return FadeInImage(
-      placeholder: AssetImage(ImagesRef.APP_ICON),
-      image: CachedNetworkImageProvider(item.largeImageUrl),
-      fit: BoxFit.cover,
-      alignment: Alignment.center,
-      fadeInDuration: Duration(milliseconds: 200),
-      fadeInCurve: Curves.easeIn,
+    return CachedNetworkImage(
+          imageUrl: item.largeImageUrl,
+          placeholder: (context, url) => CircularProgressIndicator(),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+          fadeOutDuration: Duration(seconds: 1),
+          fadeInDuration: Duration(seconds: 2),
+          fit: BoxFit.cover,
+          fadeInCurve: Curves.easeIn,
+          alignment: Alignment.center,
     );
   }
 
@@ -91,25 +85,6 @@ class DetailListItemState extends State<DetailListItem> {
           textColor: Colors.white,
           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           splashColor: Colors.grey,
-        ));
-  }
-
-  _buildPlayButton(BuildContext context) {
-    return Positioned(
-        bottom: 10,
-        right: 10.0,
-        child: FloatingActionButton(
-          backgroundColor: AppColors.colorPrimary,
-          child: Container(
-              padding: EdgeInsets.all(5.0),
-              width: 35.0,
-              height: 35.0,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      fit: BoxFit.contain, image: AssetImage(ImagesRef.PLAY)))),
-          onPressed: () => {_playVideo(context)},
-          heroTag: null,
         ));
   }
 
@@ -134,7 +109,7 @@ class DetailListItemState extends State<DetailListItem> {
 
   @override
   void dispose() {
-    chewieController.dispose();
+    chewieController?.dispose();
     super.dispose();
   }
 }

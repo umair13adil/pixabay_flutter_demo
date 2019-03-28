@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_showcase_app/bloc/bloc_base.dart';
 import 'package:flutter_showcase_app/models/downloads/Downloaded.dart';
 import 'package:flutter_showcase_app/models/repository.dart';
+import 'package:flutter_showcase_app/models/search/Hit.dart';
 
 class DownloadBloc extends BlocBase {
   static final DownloadBloc _bloc = DownloadBloc._internal();
@@ -40,18 +40,19 @@ class DownloadBloc extends BlocBase {
     }
   }
 
-  Future downloadMedia(String userName, String downloadURL, int mediaType,
-      String downloadPath, BuildContext context) async {
-    print("Download URL: " +
-        downloadURL +
-        " MediaType: ${mediaType}, Username: ${userName}");
-
+  Future downloadMedia(
+      Hit item, String downloadPath, BuildContext context) async {
+    String userName = item.user;
     String filename = "${userName}_${DateTime.now().millisecondsSinceEpoch}";
 
-    if (mediaType == 2) {
-      filename = "$filename.mp4";
-    } else {
+    String downloadURL;
+
+    if (item.type == Type.photo) {
       filename = "$filename.jpg";
+      downloadURL = item.largeImageUrl;
+    } else {
+      filename = "$filename.mp4";
+      downloadURL = item.videos.large.url;
     }
 
     String taskId = await FlutterDownloader.enqueue(
@@ -88,7 +89,7 @@ class DownloadBloc extends BlocBase {
 
         _downloadProgress.sink.add(100);
 
-        //FlutterDownloader.open(taskId: taskId);
+        FlutterDownloader.open(taskId: taskId);
 
         /*Future.delayed(const Duration(milliseconds: 500), () {
           File(downloadPath + "/" + filename)

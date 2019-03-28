@@ -29,7 +29,7 @@ class Utils {
     }
   }
 
-  static String formatFollowersText(int count) {
+  static String formatCountText(int count) {
     if (count >= 1000000000) {
       return (count / 1000000000)
               .toStringAsFixed(1)

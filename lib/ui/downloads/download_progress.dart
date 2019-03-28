@@ -8,7 +8,6 @@ import 'package:flutter_showcase_app/constants/colors_const.dart';
 import 'package:flutter_showcase_app/constants/strings_const.dart';
 import 'package:flutter_showcase_app/models/search/Hit.dart';
 import 'package:flutter_showcase_app/ui/downloads/download_bloc.dart';
-import 'package:flutter_showcase_app/ui/home/app_bar.dart';
 import 'package:flutter_showcase_app/ui/home/app_bar_2.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -71,10 +70,10 @@ class DownloadProgressScreenPageState extends State<DownloadProgressScreen> {
     downloadBloc = DownloadBloc();
     _prepare();
     _checkPermission();
-    downloadStory(candidate, context);
+    downloadContent(candidate, context);
   }
 
-  void downloadStory(Hit item, BuildContext context) async {
+  void downloadContent(Hit item, BuildContext context) async {
     _prepare().then((downloadPath) {
       print("Download Path: $downloadPath");
 
@@ -86,8 +85,7 @@ class DownloadProgressScreenPageState extends State<DownloadProgressScreen> {
 
       _checkPermission().then((hasGranted) {
         if (hasGranted) {
-          downloadBloc.downloadMedia(
-              item.user, item.largeImageUrl, 1, downloadPath, context);
+          downloadBloc.downloadMedia(item, downloadPath, context);
         } else {
           _checkPermission();
         }

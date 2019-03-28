@@ -15,6 +15,9 @@ class SearchScreenPageState extends State<HomeScreen>
   TabController _tabController;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(

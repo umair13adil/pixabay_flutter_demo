@@ -3,8 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_app/constants/colors_const.dart';
 import 'package:flutter_showcase_app/models/favourites/Favourites.dart';
+import 'package:flutter_showcase_app/models/search/Hit.dart';
+import 'package:flutter_showcase_app/models/search/Large.dart';
+import 'package:flutter_showcase_app/models/search/Videos.dart';
 import 'package:flutter_showcase_app/ui/detail/detail_page.dart';
 import 'package:flutter_showcase_app/ui/favourites/fav_bloc.dart';
+import 'package:flutter_showcase_app/utils/utils.dart';
 
 class FavouritesListItem extends StatelessWidget {
   FavBloc favBloc;
@@ -13,11 +17,26 @@ class FavouritesListItem extends StatelessWidget {
   FavouritesListItem(this.fav, this.favBloc);
 
   void _onTileClicked(BuildContext context, Favourites item) {
-    /*Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => DetailScreen(
-              username: user.username,
-            ),
-        maintainState: true));*/
+    Hit itemHit = Hit();
+    itemHit.id = item.id;
+    itemHit.user = item.username;
+    itemHit.comments = int.parse(item.comments);
+    itemHit.downloads = int.parse(item.downloads);
+    itemHit.likes = int.parse(item.likes);
+    itemHit.tags = item.tags;
+    itemHit.userImageUrl = item.userImage;
+
+    if (item.isVideo == "true") {
+      itemHit.videos = Videos(medium: Large(url: item.contentUrl));
+      itemHit.type = Type.film;
+    } else if (item.isVideo == "false") {
+      itemHit.largeImageUrl = item.contentUrl;
+      itemHit.type = Type.photo;
+    }
+
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => DetailScreen(item: itemHit),
+        maintainState: true));
   }
 
   void _removeFromFavourites() {
@@ -41,7 +60,7 @@ class FavouritesListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     _buildFullName(),
-                    _buildFollowers(),
+                    _buildDownloads(),
                     _buildUserName()
                   ],
                 ),
@@ -67,7 +86,7 @@ class FavouritesListItem extends StatelessWidget {
             shape: BoxShape.circle,
             image: DecorationImage(
                 fit: BoxFit.contain,
-                image: CachedNetworkImageProvider(fav?.full_name))));
+                image: CachedNetworkImageProvider(fav?.userImage))));
   }
 
   _buildFullName() {
@@ -89,7 +108,7 @@ class FavouritesListItem extends StatelessWidget {
     return ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 100.0),
         child: Text(
-          fav?.username,
+          fav?.tags,
           softWrap: true,
           maxLines: 1,
           overflow: TextOverflow.fade,
@@ -100,11 +119,11 @@ class FavouritesListItem extends StatelessWidget {
         ));
   }
 
-  _buildFollowers() {
+  _buildDownloads() {
     return ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 100.0),
         child: Text(
-          fav?.description,
+          "${Utils.formatCountText(int.parse(fav.downloads))}",
           softWrap: true,
           maxLines: 1,
           overflow: TextOverflow.fade,
